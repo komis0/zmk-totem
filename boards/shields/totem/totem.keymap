@@ -43,11 +43,7 @@
             label = "tmux";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings
-                = <&macro_press &kp CTRL>
-                , <&macro_tap &kp N>
-                , <&macro_release &kp CTRL>
-                ;
+            bindings = <&kp LC(N)>;
         };
     };
 
