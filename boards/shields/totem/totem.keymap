@@ -39,15 +39,14 @@
     };
 
     macros {
-        gif: gif {
-            label = "giphy";
+        tmux: tmux {
+            label = "tmux";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp N2>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp G &kp I &kp F>
+                = <&macro_press &kp CTRL>
+                , <&macro_tap &kp N>
+                , <&macro_release &kp CTRL>
                 ;
         };
     };
@@ -87,7 +86,7 @@ label= "BASE"                              ;
 label= "NAVI"                              ;
 // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃      6    ┃     7     ┃     8     ┃     9     ┃     0     ┃   ┃   PG_UP   ┃ PG_UP     ┃     b     ┃     w     ┃     v     ┃
+//             ┃      6    ┃     7     ┃     8     ┃     9     ┃     0     ┃   ┃   tmux    ┃ PG_UP     ┃     b     ┃     w     ┃     v     ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃   1       ┃   2       ┃    3      ┃   4       ┃     5     ┃   ┃     $     ┃     h     ┃     j     ┃     k     ┃     l     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
@@ -98,7 +97,7 @@ label= "NAVI"                              ;
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                &kp N6       &kp N7       &kp N8       &kp N9       &kp N0           &kp PG_UP    &kp PG_UP   &kp B   &kp W   &kp V
+                &kp N6       &kp N7       &kp N8       &kp N9       &kp N0           &tmux    &kp PG_UP   &kp B   &kp W   &kp V
                 &mt LGUI N1  &mt LALT N2  &mt LCTRL N3 &mt LSHFT N4 &kp N5           &kp DOLLAR    &kp H      &kp J       &kp K   &kp L 
     &kp GRAVE   &kp Q       &kp X       &kp M       &kp W       &kp J           &kp CARET    &kp F   &kp T   &kp N3   &kp STAR &trans      
                                         &trans     &trans     &trans          &mo ADJ     &kp PG_DN   &kp PG_DN      
