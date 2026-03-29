@@ -122,7 +122,7 @@ label= "NAVI"                              ;
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp N6       &kp N7       &kp N8       &kp N9       &kp N0           &tmux         &kp PG_UP   &kp B       &kp W     &kp V
-                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5       &kp DOLLAR    &kp H       &kp J       &kp K     &kp L 
+                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5         &kp DOLLAR    &kp H       &kp J       &kp K     &kp L 
     &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)    &kp LC(C)    &kp J            &kp CARET     &kp F       &kp T       &kp N3    &kp STAR      &trans      
                                           &trans       &trans       &trans           &mo ADJ       &kp PG_DN   &kp PG_DN                           
                         >;                                                                                                                         
@@ -190,17 +190,17 @@ label= "WAS"                              ;
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
 //             ┃     A     ┃     S     ┃     D     ┃     F     ┃     G     ┃   ┃     H     ┃     J     ┃     K     ┃     L     ┃     ;     ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃     Z     ┃     Z     ┃     X     ┃     C     ┃     V     ┃     B     ┃   ┃     N     ┃     M     ┃     ,     ┃     .     ┃   esc     ┃    WAS    ┃
+// ┃  LSHFT    ┃     Z     ┃     X     ┃     C     ┃     V     ┃     B     ┃   ┃     N     ┃     M     ┃     ,     ┃     .     ┃   esc     ┃    WAS    ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
-//                                     ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃
+//                                     ┃           ┃           ┃           ┃   ┃           ┃    tab    ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
                 &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
                 &kp A       &kp S       &kp D       &kp F       &kp G           &kp H       &kp J       &kp K       &kp L       &kp SEMI
-    &kp Z       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog WAS
-                                        &kp L       &kp P       &kp SPACE       &kp RET     &kp BSPC    &kp BSPC
+    &kp LSHFT   &kp Z       &kp X       &kp C       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog WAS
+                                        &kp L       &kp P       &kp SPACE       &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
 
