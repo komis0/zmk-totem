@@ -228,7 +228,7 @@ label= "EXT"                              ;
 
                 &kp Q       &kp W       &kp E       &kp R       &kp T           &kp F2      &kp F3      &kp F4      &kp F5      &kp P
                 &kp A       &kp S       &kp H       &kp RET     &kp G           &kp H       &kp J       &kp K       &kp L       &kp SEMI
-    &kp F1      &kp Z       &kp X       &kp C       &kp esc     &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog EXT
+    &kp F1      &kp Z       &kp X       &kp C       &kp ESC     &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog EXT
                                         &kp LSHFT   &kp LCTRL   &kp SPACE       &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
