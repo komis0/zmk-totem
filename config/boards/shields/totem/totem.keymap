@@ -37,6 +37,24 @@
 
 / {
     behaviors {
+                td_boot: tap_dance_bootloader {
+                    compatible = "zmk,behavior-tap-dance";
+                    #binding-cells = <0>;
+                    tapping-term-ms = <300>;
+                    bindings = <&none>, <&bootloader>;
+                };
+                td_rst: tap_dance_reset {
+                    compatible = "zmk,behavior-tap-dance";
+                    #binding-cells = <0>;
+                    tapping-term-ms = <300>;
+                    bindings = <&none>, <&sys_reset>;
+                };
+                td_btclr: tap_dance_bt_clear {
+                    compatible = "zmk,behavior-tap-dance";
+                    #binding-cells = <0>;
+                    tapping-term-ms = <300>;
+                    bindings = <&none>, <&bt BT_CLR>;
+                };
         hml: home_row_mod_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -164,21 +182,21 @@ label= "SYM"                               ;
 // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 label= "ADJ"                               ;
 //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓
-//             ┃   RESET   ┃ BT CLEAR  ┃  OUT TOG  ┃           ┃    WAS    ┃   ┃   caps    ┃    F7     ┃    F8     ┃    F9     ┃    F12    ┃
+//             ┃   RESET   ┃ BT CLEAR  ┃ togUsbble ┃           ┃    WAS    ┃   ┃   caps    ┃    F7     ┃    F8     ┃    F9     ┃    F12    ┃
 //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫
-//             ┃ BOOTLOAD  ┃ BT NEXT   ┃           ┃           ┃    EXT    ┃   ┃           ┃    F4     ┃    F5     ┃    F6     ┃    F11    ┃
+//             ┃ BOOTLOAD  ┃ BT 0      ┃  BT 1     ┃   BT 2    ┃    EXT    ┃   ┃           ┃    F4     ┃    F5     ┃    F6     ┃    F11    ┃
 // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓
-// ┃  UNLOCK   ┃           ┃ BT PREV   ┃           ┃           ┃    FAC    ┃   ┃           ┃    F1     ┃    F2     ┃    F3     ┃    F10    ┃           ┃
+// ┃  UNLOCK   ┃           ┃           ┃           ┃           ┃    FAC    ┃   ┃           ┃    F1     ┃    F2     ┃    F3     ┃    F10    ┃   bt_boot ┃
 // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
 //                                     ┃           ┃           ┃           ┃   ┃           ┃           ┃           ┃
 //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛
  bindings = <
 // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷
 
-                   &sys_reset  &bt BT_CLR   &out OUT_TOG &trans      &tog WAS        &caps_word  &kp F7      &kp F8      &kp F9      &kp F12
-                   &bootloader &bt BT_NXT   &trans       &trans      &tog EXT        &trans      &kp F4      &kp F5      &kp F6      &kp F11  
-    &studio_unlock &trans      &bt BT_PRV   &trans       &trans      &tog FAC        &trans      &kp F1      &kp F2      &kp F3      &kp F10     &trans         
-                                            &trans       &trans      &trans          &trans      &trans      &trans      
+                   &td_rst     &td_btclr    &out OUT_TOG &trans       &tog WAS        &caps_word  &kp F7      &kp F8      &kp F9      &kp F12
+                   &td_boot    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &tog EXT        &trans      &kp F4      &kp F5      &kp F6      &kp F11  
+    &studio_unlock &trans      &trans       &trans       &trans       &tog FAC        &trans      &kp F1      &kp F2      &kp F3      &kp F10     &td_boot         
+                                            &trans       &trans       &trans          &trans      &trans      &trans      
                         >;
                 };
 
