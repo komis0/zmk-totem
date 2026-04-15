@@ -24,10 +24,6 @@
 #define EXT  5
 #define FAC  6
 
-#define KEYS_L 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 25
-#define KEYS_R 5 6 7 8 9 15 16 17 18 19 26 27 28 29 30 31
-#define THUMBS 32 33 34 35 36 37
-
 /* &mt { */
 /*   quick-tap-ms = <100>; */
 /*   global-quick-tap; */
@@ -63,7 +59,7 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 26 27 28 29 30 31 35 36 37>;/*  TODO! make a macro */
             hold-trigger-on-release;
         };
         hmr: home_row_mod_right {
@@ -74,7 +70,7 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-key-positions = <0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 25 32 33 34>;
             hold-trigger-on-release;
         };
     };
@@ -196,7 +192,7 @@ label= "ADJ"                               ;
                    &td_rst     &td_btclr    &out OUT_TOG &trans       &tog WAS        &caps_word  &kp F7      &kp F8      &kp F9      &kp F12
                    &td_boot    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &tog EXT        &trans      &kp F4      &kp F5      &kp F6      &kp F11  
     &studio_unlock &trans      &trans       &trans       &trans       &tog FAC        &trans      &kp F1      &kp F2      &kp F3      &kp F10     &td_boot         
-                                            &trans       &trans       &trans          &trans      &trans      &trans      
+                                            &trans       &trans      &trans          &trans      &trans      &trans      
                         >;
                 };
 
