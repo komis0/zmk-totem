@@ -1,0 +1,7 @@
+/.direnv
+/modules
+/optional/modules/lib
+/zephyr
+/zmk
+/.build
+/firmware
