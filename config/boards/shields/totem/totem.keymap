@@ -97,6 +97,26 @@
             #binding-cells = <0>;
             bindings = <&kp LC(N)>;
         };
+
+        search: search {
+            label = "search";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(C) &kp LC(T) &kp LC(V) &kp RET>;
+        };
+        select_line: select_line {
+            label = "select_line";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp HOME &kp LS(END)>;
+        };
+
+        select_word: select_word {
+            label = "select_word";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LEFT) &kp LC(LS(RIGHT))>;
+        };
     };
 
         keymap {
@@ -107,10 +127,10 @@
 label= "BASE"                              ;
  bindings = <
 
-                &kp B       &kp L       &kp D        &kp C        &kp V           &kp Z       &kp Y        &kp O        &kp U       &kp COMMA
-                &hml LGUI N &hml LALT R &hml LCTRL T &hml LSHFT S &kp G           &kp P       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
-    &kp Z       &kp Q       &kp X       &kp M        &kp W        &kp J           &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
-                                        &kp TAB      &lt MOU ESC  &lt NAV SPACE   &lt SYM RET &kp BSPC     &kp BSPC
+                &kp B       &kp L       &kp D        &kp C        &kp V                &kp Z       &kp Y        &kp O        &kp U       &kp COMMA
+                &hml LGUI N &hml LALT R &hml LCTRL T &hml LSHFT S &kp G                &kp P       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
+    &kp Z       &kp Q       &kp X       &kp M        &kp W        &kp J                &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
+                                        &kp TAB      &lt MOU ESC  &lt NAV SPACE        &lt SYM RET &kp BSPC     &kp BSPC
                         >;
                 };
 
@@ -121,9 +141,9 @@ label= "BASE"                              ;
 label= "NAVI"                              ;
  bindings = <
 
-                &kp N6       &kp N7       &kp N8        &kp N9        &kp N0           &tmux         &kp PG_UP   &kp B       &kp W     &kp V
-                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5           &kp DOLLAR    &kp H       &kp J       &kp K     &kp L 
-    &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)     &kp LC(C)     &tog WAS         &kp CARET     &kp F       &kp T       &kp N3    &kp STAR      &trans      
+                &kp N6       &kp N7       &kp N8        &kp N9        &kp N0           &tmux         &kp PG_UP   &search     &select_line  &select_word
+                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5           &kp DOLLAR    &kp H       &kp J       &kp K         &kp L 
+    &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)     &kp LC(C)     &tog WAS         &kp CARET     &kp F       &kp T       &kp N3        &kp STAR      &trans      
                                           &trans        &trans        &trans           &mo ADJ       &kp PG_DN   &kp PG_DN                           
                         >;                                                                                                                         
                 };                                                                                                                                 
@@ -149,10 +169,10 @@ label= "SYM"                               ;
 label= "ADJ"                               ;
  bindings = <
 
-                   &td_rst     &td_btclr    &out OUT_TOG &trans       &tog WAS        &caps_word  &kp F7      &kp F8      &kp F9      &kp F12
-                   &td_boot    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &tog EXT        &trans      &kp F4      &kp F5      &kp F6      &kp F11  
-    &studio_unlock &trans      &trans       &trans       &trans       &trans          &trans      &kp F1      &kp F2      &kp F3      &kp F10     &td_boot         
-                                            &trans       &trans       &trans          &trans      &trans      &trans      
+                   &td_rst     &td_btclr    &out OUT_TOG &trans       &tog WAS         &caps_word  &kp F7      &kp F8      &kp F9      &kp F12
+                   &td_boot    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &tog EXT         &trans      &kp F4      &kp F5      &kp F6      &kp F11  
+    &studio_unlock &trans      &trans       &trans       &trans       &trans           &trans      &kp F1      &kp F2      &kp F3      &kp F10     &td_boot         
+                                            &trans       &trans       &trans           &trans      &trans      &trans      
                         >;
                 };
 
@@ -162,10 +182,10 @@ label= "ADJ"                               ;
 label= "WAS"                              ;
  bindings = <
 
-                &kp Q       &kp F       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P
-                &kp C       &kp A       &kp W       &kp D       &kp G           &kp H       &kp J       &kp K       &kp L       &kp SEMI
-    &kp LSHFT   &kp Z       &kp X       &kp S       &kp V       &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog WAS
-                                        &kp P       &lt WASS L  &kp SPACE       &kp RET     &kp TAB     &kp BSPC
+                &kp Q       &kp F       &kp E       &kp R       &kp T                  &kp Y       &kp U       &kp I       &kp O       &kp P
+                &kp C       &kp A       &kp W       &kp D       &kp G                  &kp H       &kp J       &kp K       &kp L       &kp SEMI
+    &kp LSHFT   &kp Z       &kp X       &kp S       &kp V       &kp B                  &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog WAS
+                                        &kp LCTRL   &lt WASS L  &kp SPACE              &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
 
@@ -176,10 +196,10 @@ label= "WAS"                              ;
 label= "WASS"                              ;
  bindings = <
 
-                &kp Q       &kp O       &kp I       &kp R       &kp L           &trans      &trans      &trans       &trans      &kp P
-                &kp COMMA   &kp N       &kp K       &kp TAB     &kp H           &trans      &trans      &trans       &trans      &kp SEMI
-    &kp LCTRL   &kp Y       &kp U       &kp M       &kp ESC     &kp J           &trans      &trans      &trans       &trans      &kp ESC    &tog WASS
-                                        &to BASE    &trans      &kp LALT        &kp RET     &kp TAB     &kp BSPC
+                &kp Q       &kp O       &kp I       &kp R       &kp L                  &trans      &trans      &trans       &trans      &kp P
+                &kp COMMA   &kp N       &kp K       &kp TAB     &kp H                &trans      &trans      &trans       &trans      &kp SEMI
+    &kp LCTRL   &kp Y       &kp U       &kp M       &kp ESC     &kp J                  &trans      &trans      &trans       &trans      &kp ESC    &tog WASS
+                                        &to BASE    &trans      &kp LALT               &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
 
@@ -190,10 +210,10 @@ label= "WASS"                              ;
 label= "EXT"                              ;
  bindings = <
 
-                &kp Q       &kp W       &kp R       &kp T       &kp Y           &kp F2      &kp F3      &kp F4      &kp F5      &kp P
-                &kp F1      &kp S       &kp H       &kp RET     &kp G           &kp H       &kp J       &kp K       &kp L       &kp SEMI
-    &kp F3      &kp Z       &kp X       &kp C       &kp ESC     &kp B           &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog EXT
-                                        &kp LSHFT   &kp LCTRL   &kp SPACE       &kp RET     &kp TAB     &kp BSPC
+                &kp Q       &kp W       &kp R       &kp T       &kp Y                  &kp F2      &kp F3      &kp F4      &kp F5      &kp P
+                &kp F1      &kp S       &kp H       &kp RET     &kp G                  &kp H       &kp J       &kp K       &kp L       &kp SEMI
+    &kp F3      &kp Z       &kp X       &kp C       &kp ESC     &kp B                  &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog EXT
+                                        &kp LSHFT   &kp LCTRL   &kp SPACE              &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
 
@@ -203,10 +223,10 @@ label= "EXT"                              ;
 label= "MOU"                              ;
  bindings = <
 
-                U_WH_L            U_WH_R         &mkp MCLK     &kp DOLLAR    &kp PRCNT                     &kp HASH &kp BSLH &kp AMPERSAND &kp EXCLAMATION &trans       
-                U_WH_U            U_WH_D         &mkp RCLK     &mkp LCLK     &trans                        &trans   U_MS_L   U_MS_D         U_MS_U         U_MS_R 
-    &kp GRAVE   &kp STAR          &kp AT         &kp MINUS     &kp ESC       &trans                        &trans   &trans   &trans         &trans         &trans     &trans        
-                                                 &trans        &trans        &mo ADJ                       &trans   &trans   &trans      
+                U_WH_L      U_WH_R  &mkp MCLK     &kp DOLLAR    &kp PRCNT              &kp HASH &kp BSLH &kp AMPERSAND &kp EXCLAMATION &trans       
+                U_WH_U      U_WH_D  &mkp RCLK     &mkp LCLK     &trans                 &trans   U_MS_L   U_MS_D         U_MS_U         U_MS_R 
+    &kp GRAVE   &kp STAR    &kp AT  &kp MINUS     &kp ESC       &trans                 &trans   &trans   &trans         &trans         &trans     &trans        
+                                    &trans        &trans        &mo ADJ                &trans   &trans   &trans      
                         >;
                 };
 
