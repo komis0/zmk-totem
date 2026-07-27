@@ -82,7 +82,42 @@
         };
     };
     combos {
+        compatible = "zmk,combos"; 
+        combo_esc {
+            timeout-ms = <35>;
+            key-positions = <17 18>; // H A
+            bindings = <&kp ESC>;
+        };
 
+        combo_ret {
+            timeout-ms = <35>;
+            key-positions = <12 13>; // s t
+            bindings = <&kp SPACE>;
+        };
+                
+        combo_spc {
+            timeout-ms = <35>;
+            key-positions = <16 17>; // A E
+            bindings = <&kp RET>;
+        };
+
+        combo_tab {
+            timeout-ms = <35>;
+            key-positions = <11 12>; // rt
+            bindings = <&kp TAB>;
+        };
+
+        combo_bspc {
+            timeout-ms = <35>;
+            key-positions = <18 19>; // ie
+            bindings = <&kp BSPC>;
+        };
+
+        combo_del {
+            timeout-ms = <35>;
+            key-positions = <7 8>; // O U
+            bindings = <&kp DEL>;
+        };
             /* combo_esc { */
             /*     timeout-ms = <50>; */
             /*     key-positions = <0 1>; */
@@ -127,10 +162,10 @@
 label= "BASE"                              ;
  bindings = <
 
-                &kp B       &kp L       &kp D        &kp C        &kp V                &kp Z       &kp Y        &kp O        &kp U       &kp COMMA
-                &hml LGUI N &hml LALT R &hml LCTRL T &hml LSHFT S &kp G                &kp P       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
-    &kp Z       &kp Q       &kp X       &kp M        &kp W        &kp J                &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
-                                        &kp TAB      &lt MOU ESC  &lt NAV SPACE        &lt SYM RET &kp BSPC     &kp BSPC
+                &kp B       &kp L       &kp D        &kp V         &caps_word           &kp Z       &kp Y        &kp O        &kp U       &kp COMMA
+                &hml LGUI N &hml LALT C &hml LCTRL M &hml LSHFT S  &kp G                &kp P       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
+    &kp Z       &kp Q       &kp X       &select_word &kp W         &kp J                &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
+                                        &kp TAB      &lt NAV T     &lt MOU ESC          &key_repeat &lt SYM R    &kp BSPC
                         >;
                 };
 
@@ -158,7 +193,7 @@ label= "SYM"                               ;
                 &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp CARET      &kp DOLLAR      &kp PRCNT                     &trans   &kp BSLH  &kp AMPERSAND &kp EXCLAMATION &trans       
                 &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp LEFT_BRACE &kp RIGHT_BRACE &kp HASH                      &trans   &kp LEFT  &kp DOWN      &kp UP          &kp RIGHT 
     &kp GRAVE   &kp STAR                &kp AT                 &kp MINUS      &kp PLUS        &kp EQUAL                     &trans   &trans    &trans        &trans          &trans     &trans        
-                                                               &trans         &trans          &mo ADJ                       &trans   &trans    &trans      
+                                                               &trans         &mo ADJ         &trans                       &trans   &trans    &trans      
                         >;
                 };
 
@@ -185,7 +220,7 @@ label= "WAS"                              ;
                 &kp Q       &kp F       &kp E       &kp R       &kp T                  &kp Y       &kp U       &kp I       &kp O       &kp P
                 &kp C       &kp A       &kp W       &kp D       &kp G                  &kp H       &kp J       &kp K       &kp L       &kp SEMI
     &kp LSHFT   &kp Z       &kp X       &kp S       &kp V       &kp B                  &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog WAS
-                                        &kp LCTRL   &lt WASS L  &kp SPACE              &kp RET     &kp TAB     &kp BSPC
+                                        &kp LCTRL   &kp SPACE  &lt WASS L              &kp TAB     &kp RET     &kp BSPC
                         >;
                 };
 
@@ -197,9 +232,9 @@ label= "WASS"                              ;
  bindings = <
 
                 &kp Q       &kp O       &kp I       &kp R       &kp L                  &trans      &trans      &trans       &trans      &kp P
-                &kp COMMA   &kp N       &kp K       &kp TAB     &kp H                &trans      &trans      &trans       &trans      &kp SEMI
+                &kp COMMA   &kp N       &kp K       &kp TAB     &kp H                  &trans      &trans      &trans       &trans      &kp SEMI
     &kp LCTRL   &kp Y       &kp U       &kp M       &kp ESC     &kp J                  &trans      &trans      &trans       &trans      &kp ESC    &tog WASS
-                                        &to BASE    &trans      &kp LALT               &kp RET     &kp TAB     &kp BSPC
+                                        &to BASE    &kp LALT    &trans                 &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
 
@@ -213,7 +248,7 @@ label= "EXT"                              ;
                 &kp Q       &kp W       &kp R       &kp T       &kp Y                  &kp F2      &kp F3      &kp F4      &kp F5      &kp P
                 &kp F1      &kp S       &kp H       &kp RET     &kp G                  &kp H       &kp J       &kp K       &kp L       &kp SEMI
     &kp F3      &kp Z       &kp X       &kp C       &kp ESC     &kp B                  &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog EXT
-                                        &kp LSHFT   &kp LCTRL   &kp SPACE              &kp RET     &kp TAB     &kp BSPC
+                                        &kp LSHFT   &kp SPACE   &kp LCTRL              &kp TAB     &kp RET     &kp BSPC
                         >;
                 };
 
@@ -226,7 +261,7 @@ label= "MOU"                              ;
                 U_WH_L      U_WH_R  &mkp MCLK     &kp DOLLAR    &kp PRCNT              &kp HASH &kp BSLH &kp AMPERSAND &kp EXCLAMATION &trans       
                 U_WH_U      U_WH_D  &mkp RCLK     &mkp LCLK     &trans                 &trans   U_MS_L   U_MS_D         U_MS_U         U_MS_R 
     &kp GRAVE   &kp STAR    &kp AT  &kp MINUS     &kp ESC       &trans                 &trans   &trans   &trans         &trans         &trans     &trans        
-                                    &trans        &trans        &mo ADJ                &trans   &trans   &trans      
+                                    &trans        &mo ADJ       &trans                 &trans   &trans   &trans      
                         >;
                 };
 
