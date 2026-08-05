@@ -18,6 +18,15 @@
 #include <dt-bindings/zmk/pointing.h>
 
 
+
+#define COMBO(name, fkey, ...) \
+    combo_##name { \
+        timeout-ms = <50>; \
+        key-positions = <__VA_ARGS__>; \
+        bindings = <&kp fkey>; \
+        layers = <ADJ>; \
+    };
+
 #define BASE 0
 #define NAV  1
 #define SYM  2
@@ -66,7 +75,7 @@
             tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 26 27 28 29 30 31 35 36 37>;/*  TODO! make a macro */
+            hold-trigger-key-positions = <5 6 7 8 9 15 16 17 18 19 26 27 28 29 30 31 35 36 37>;
             hold-trigger-on-release;
         };
         hmr: home_row_mod_right {
@@ -87,48 +96,67 @@
             timeout-ms = <35>;
             key-positions = <17 18>; // H A
             bindings = <&kp ESC>;
-            layers = <BASE SYM NAV ADJ>;
+            layers = <BASE SYM NAV>;
         };
 
         combo_ret {
             timeout-ms = <35>;
             key-positions = <33 36>; // s t
             bindings = <&kp SPACE>;
-            layers = <BASE SYM NAV ADJ>;
+            layers = <BASE SYM NAV>;
         };
                 
         combo_spc {
             timeout-ms = <35>;
             key-positions = <16 17>; // A E
             bindings = <&kp RET>;
-            layers = <BASE SYM NAV ADJ>;
+            layers = <BASE SYM NAV>;
         };
 
-        combo_tab {
-            timeout-ms = <35>;
-            key-positions = <11 12>; // rt
-            bindings = <&kp TAB>;
-            layers = <BASE SYM NAV ADJ>;
-        };
+        /* combo_tab { */
+        /*     timeout-ms = <35>; */
+        /*     key-positions = <11 12>; // cm */
+        /*     bindings = <&kp TAB>; */
+        /*     layers = <BASE SYM NAV ADJ>; */
+        /* }; */
 
         combo_bspc {
             timeout-ms = <35>;
             key-positions = <18 19>; // ie
             bindings = <&kp BSPC>;
-            layers = <BASE SYM NAV ADJ>;
+            layers = <BASE SYM NAV>;
         };
 
         combo_del {
             timeout-ms = <35>;
             key-positions = <7 8>; // O U
             bindings = <&kp DEL>;
-            layers = <BASE SYM NAV ADJ>;
+            layers = <BASE SYM NAV>;
+        };
+
+        combo_f13B {
+            timeout-ms = <35>;
+            key-positions = <13 33>; // st
+            bindings = <&kp F13>;
+            layers = <BASE SYM NAV>;
         };
             /* combo_esc { */
             /*     timeout-ms = <50>; */
             /*     key-positions = <0 1>; */
             /*     bindings = <&kp ESC>; */
             /* }; */
+
+            COMBO(f3,  F3,  10 11)
+            COMBO(f5,  F5,  10 12)
+            COMBO(f6,  F6,  11 12)
+            COMBO(f7,  F7,  10 11 12)
+            COMBO(f9,  F9,  10 13)
+            COMBO(f10, F10, 11 13)
+            COMBO(f11, F11, 10 11 13)
+            COMBO(f12, F12, 12 13)
+            COMBO(f13, F13, 10 12 13)
+            COMBO(f14, F14, 11 12 13)
+            COMBO(f15, F15, 10 11 12 13)
     };
 
     macros {
@@ -169,8 +197,8 @@ label= "BASE"                              ;
  bindings = <
 
                 &kp B       &kp L       &kp D        &kp V         &caps_word           &kp Z       &kp Y        &kp O        &kp U       &kp COMMA
-                &hml LGUI N &hml LALT C &hml LCTRL M &hml LSHFT S  &kp G                &kp P       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
-    &kp K       &kp Q       &kp X       &kp W        &kp J         &kp F13              &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
+                &hml LGUI N &hml LALT C &hml LCTRL M &hml LSHFT S  &kp X                &kp J       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
+    &kp K       &kp Q       &kp G       &kp W        &kp P         &kp F13              &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
                                         &kp TAB      &lt NAV T     &lt MOU SPACE        &key_repeat &lt SYM R    &kp BSPC
                         >;
                 };
@@ -182,9 +210,9 @@ label= "BASE"                              ;
 label= "NAVI"                              ;
  bindings = <
 
-                &kp N6       &kp N7       &kp N8        &kp N9        &kp N0           &tmux         &kp PG_UP   &search     &select_line  &select_word
-                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5           &kp DOLLAR    &kp H       &kp J       &kp K         &kp L 
-    &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)     &kp LC(C)     &tog WAS         &kp CARET     &kp F       &kp T       &kp N3        &kp STAR      &trans      
+                &kp N6       &kp N7       &kp N8        &kp N9        &kp N0           &tmux         &kp PG_UP   &search       &select_line  &select_word
+                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5           &kp DOLLAR    &kp H       &kp J         &kp K         &kp L 
+    &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)     &kp LC(C)     &tog WAS         &kp CARET     &kp K_BACK  &kp K_FORWARD &kp C_VOL_DN  &kp C_VOL_UP     &trans              
                                           &trans        &trans        &trans           &mo ADJ       &kp PG_DN   &kp PG_DN                           
                         >;                                                                                                                         
                 };                                                                                                                                 
@@ -196,10 +224,10 @@ label= "NAVI"                              ;
 label= "SYM"                               ;
  bindings = <
 
-                &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp CARET      &kp DOLLAR      &kp PRCNT            &trans   &kp BSLH  &kp AMPERSAND &kp EXCLAMATION &trans       
-                &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp LEFT_BRACE &kp RIGHT_BRACE &kp HASH             &trans   &kp LEFT  &kp DOWN      &kp UP          &kp RIGHT 
-    &kp GRAVE   &kp STAR                &kp AT                 &kp MINUS      &kp PLUS        &kp EQUAL            &trans   &kp K_BACK   &kp K_FORWARD     &kp C_VOL_DN          &kp C_VOL_UP     &trans        
-                                                               &trans         &mo ADJ         &trans              &trans   &trans    &trans      
+                &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp CARET      &kp DOLLAR      &kp PRCNT            &trans   &kp BSLH   &kp AMPERSAND &kp EXCLAMATION &trans       
+                &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp LEFT_BRACE &kp RIGHT_BRACE &kp HASH             &trans   &kp LEFT   &kp DOWN      &kp UP          &kp RIGHT 
+    &kp GRAVE   &kp STAR                &kp AT                 &kp MINUS      &kp PLUS        &kp EQUAL            &trans   &trans       &trans       &trans        &trans      &trans
+                                                               &trans         &mo ADJ         &trans              &trans   &trans      &trans      
                         >;
                 };
 
@@ -210,9 +238,9 @@ label= "SYM"                               ;
 label= "ADJ"                               ;
  bindings = <
 
-                   &td_rst     &td_btclr    &out OUT_TOG &trans       &tog WAS         &caps_word  &kp F7      &kp F8      &kp F9      &kp F12
-                   &td_boot    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &tog EXT         &trans      &kp F4      &kp F5      &kp F6      &kp F11  
-    &studio_unlock &trans      &trans       &trans       &trans       &trans           &trans      &kp F1      &kp F2      &kp F3      &kp F10     &td_boot         
+                   &td_rst     &td_btclr    &out OUT_TOG &trans       &tog WAS         &caps_word  &trans     &trans     &trans     &trans
+                   &kp F1      &kp F2       &kp F4       &kp F8       &tog EXT         &td_boot    &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2     &trans  
+    &studio_unlock &trans      &trans       &trans       &trans       &trans           &trans      &trans     &trans     &trans     &trans     &td_boot         
                                             &trans       &trans       &trans           &trans      &trans      &trans      
                         >;
                 };
