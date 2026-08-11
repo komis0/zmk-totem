@@ -8,7 +8,7 @@
 //                                                             ▀▀▀▀▀    █  █  █      ▀
 //                                                                      ▀  ▀  ▀
 //
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
        
 
 #include <behaviors.dtsi>
@@ -19,6 +19,7 @@
 
 
 #define LAYERS_TYPING BASE SYM NAV
+#define LAYERS_NAV    NAV 
 #define LAYERS_ADJ    ADJ
 
 
@@ -71,25 +72,29 @@
 #define WASS 5
 #define EXT  6
 #define MOU  7
+#define MEOW 8
 
 
 // MUST BE HERE otherwise mou undefined when parsed 
 #include "mouse.dtsi"
 
-/* &mt { */
-/*   quick-tap-ms = <100>; */
-/*   global-quick-tap; */
-/*   flavor = "tap-preferred"; */
-/*   tapping-term-ms = <170>; */
-/* }; */
 
 / {
     behaviors {
         TAPDANCE(td_boot,  &bootloader)
         TAPDANCE(td_rst,   &sys_reset)
         TAPDANCE(td_btclr, &bt BT_CLR)
-        HRM(hml, 5 6 7 8 9 15 16 17 18 19 26 27 28 29 30 31 35 36 37)
-        HRM(hmr, 0 1 2 3 4 10 11 12 13 14 20 21 22 23 24 25 32 33 34)
+        // TODO must check
+        HRM(hmr, 0 1 2 3 4 10 11 12 13 14 30 20 21 22 23 24 32 33 34)
+        HRM(hml, 5 6 7 8 9 15 16 17 18 19 25 26 27 28 29 39 35 36 37)
+      skq: sticky_key_quick_release {
+        compatible = "zmk,behavior-sticky-key";
+        #binding-cells = <1>;
+        bindings = <&kp>;
+        release-after-ms = <1000>;
+        quick-release;
+        ignore-modifiers;
+      };
     };
     combos {
         compatible = "zmk,combos"; 
@@ -98,6 +103,7 @@
         COMBO(spc,  RET,   LAYERS_TYPING, 16 17)   // A E
         COMBO(del,  DEL,   LAYERS_TYPING, 7 8)     // O U
         COMBO(f13B, F13,   LAYERS_TYPING, 13 33)   // s t
+        COMBO(TABB, TAB,   LAYERS_TYPING, 16 18)   // h e
 
         COMBO(f3,  F3,  LAYERS_ADJ, 10 11)
         COMBO(f5,  F5,  LAYERS_ADJ, 10 12)
@@ -110,10 +116,13 @@
         COMBO(f13, F13, LAYERS_ADJ, 10 12 13)
         COMBO(f14, F14, LAYERS_ADJ, 11 12 13)
         COMBO(f15, F15, LAYERS_ADJ, 10 11 12 13)
+
+        COMBO(NUM0, N0, LAYERS_NAV, 11 12)
+        COMBO(NUM5, N5, LAYERS_NAV, 12 13)
     };
 
     macros {
-        MACRO(tmux,        &kp LC(N))
+        MACRO(tmux,         &kp LC(N))
         MACRO(search,       &kp LC(C) &kp LC(T) &kp LC(V) &kp RET)
         MACRO(select_line,  &kp HOME &kp LS(END))
         MACRO(select_word,  &kp LC(LEFT) &kp LC(LS(RIGHT)))
@@ -121,48 +130,48 @@
 
         keymap {
                 compatible = "zmk,keymap";
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 base_layer {
 label= "BASE"                              ;
  bindings = <
 
-                &kp B       &kp L       &kp D        &kp V         &caps_word           &kp Z       &kp Y        &kp O        &kp U       &kp COMMA
-                &hml LGUI N &hml LALT C &hml LCTRL M &hml LSHFT S  &kp X                &kp J       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
-    &kp K       &kp Q       &kp G       &kp W        &kp P         &kp F13              &kp K       &kp F        &kp SQT      &kp SEMI    &kp DOT    &kp FSLH
-                                        &kp TAB      &lt NAV T     &lt MOU SPACE        &key_repeat &lt SYM R    &kp BSPC
-                        >;
+                &kp B       &kp L       &kp D        &kp V         &caps_word           &trans      &kp Y        &kp O        &kp U       &kp COMMA
+                &hml LGUI N &hml LALT C &hml LCTRL M &hml LSHFT S  &key_repeat          &kp Z       &hmr RSHFT H &hmr RCTRL A &hmr RALT E &hmr RGUI I
+    &skq LSHFT  &kp Q       &kp G       &kp W        &kp P         &kp F13              &skq LCTRL  &kp F        &kp SQT      &kp SEMI    &kp DOT     &kp FSLH
+                                        &key_repeat  &lt NAV T     &lt MOU SPACE        &sl MEOW    &lt SYM R    &kp BSPC
+                        >; // TODO momentary layer for jk. also gl fy wd pv 
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 nav_layer {
 label= "NAVI"                              ;
  bindings = <
 
-                &kp N6       &kp N7       &kp N8        &kp N9        &kp N0           &tmux         &kp PG_UP   &search       &select_line  &select_word
-                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &kp N5           &kp DOLLAR    &kp H       &kp J         &kp K         &kp L 
-    &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)     &kp LC(C)     &tog WAS         &kp CARET     &kp K_BACK  &kp K_FORWARD &kp C_VOL_DN  &kp C_VOL_UP     &trans              
-                                          &trans        &trans        &trans           &mo ADJ       &kp PG_DN   &kp PG_DN                           
-                        >;                                                                                                                         
-                };                                                                                                                                 
+                &kp N6       &kp N7       &kp N8        &kp N9        &trans           &tmux         &kp PG_UP   &search       &select_line  &select_word
+                &hml LGUI N1 &hml LALT N2 &hml LCTRL N3 &hml LSHFT N4 &trans           &kp DOLLAR    &kp H       &kp J         &kp K         &kp L 
+    &kp GRAVE   &kp LC(Y)    &kp LC(Z)    &kp LC(V)     &kp LC(C)     &tog WAS         &kp CARET     &kp K_BACK  &kp K_FORWARD &kp C_VOL_DN  &kp C_VOL_UP     &trans
+                                          &trans        &trans        &trans           &mo ADJ       &kp PG_DN   &kp PG_DN
+                        >;
+                };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 sym_layer {
 label= "SYM"                               ;
  bindings = <
 
-                &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp CARET      &kp DOLLAR      &kp PRCNT            &trans   &kp BSLH   &kp AMPERSAND &kp EXCLAMATION &trans       
-                &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp LEFT_BRACE &kp RIGHT_BRACE &kp HASH             &trans   &kp LEFT   &kp DOWN      &kp UP          &kp RIGHT 
-    &kp GRAVE   &kp STAR                &kp AT                 &kp MINUS      &kp PLUS        &kp EQUAL            &trans   &trans       &trans       &trans        &trans      &trans
-                                                               &trans         &mo ADJ         &trans              &trans   &trans      &trans      
+                &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS  &kp CARET      &kp DOLLAR      &kp PRCNT            &trans   &kp BSLH  &kp AMPERSAND &kp EXCLAMATION &trans       
+                &kp LEFT_BRACKET        &kp RIGHT_BRACKET      &kp LEFT_BRACE &kp RIGHT_BRACE &kp HASH             &trans   &kp LEFT  &kp DOWN      &kp UP          &kp RIGHT 
+    &kp GRAVE   &kp STAR                &kp AT                 &kp MINUS      &kp PLUS        &kp EQUAL            &trans   &trans    &trans        &trans          &trans      &trans
+                                                               &trans         &mo ADJ         &trans               &trans   &trans    &trans      
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 adjust_layer {
@@ -176,7 +185,7 @@ label= "ADJ"                               ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 was_layer {
 label= "WAS"                              ;
@@ -185,25 +194,25 @@ label= "WAS"                              ;
                 &kp Q       &kp F       &kp E       &kp R       &kp T                  &kp Y       &kp U       &kp I       &kp O       &kp P
                 &kp C       &kp A       &kp W       &kp D       &kp G                  &kp H       &kp J       &kp K       &kp L       &kp SEMI
     &kp LSHFT   &kp Z       &kp X       &kp S       &kp V       &kp B                  &kp N       &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog WAS
-                                        &kp LCTRL   &kp SPACE  &lt WASS L              &kp TAB     &kp RET     &kp BSPC
+                                        &kp LCTRL   &lt WASS L  &kp SPACE              &kp TAB     &kp RET     &kp BSPC
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 wass_layer {
 label= "WASS"                              ;
  bindings = <
 
-                &kp Q       &kp O       &kp I       &kp R       &kp L                  &trans      &trans      &trans       &trans      &kp P
+                &kp DOT     &kp O       &kp I       &kp P       &kp L                  &trans      &trans      &trans       &trans      &kp P
                 &kp COMMA   &kp N       &kp K       &kp TAB     &kp H                  &trans      &trans      &trans       &trans      &kp SEMI
     &kp LCTRL   &kp Y       &kp U       &kp M       &kp ESC     &kp J                  &trans      &trans      &trans       &trans      &kp ESC    &tog WASS
                                         &to BASE    &kp LALT    &trans                 &kp RET     &kp TAB     &kp BSPC
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 
                 ext_layer {
@@ -217,7 +226,7 @@ label= "EXT"                              ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
                 mou_layer {
 label= "MOU"                              ;
@@ -230,31 +239,19 @@ label= "MOU"                              ;
                         >;
                 };
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
-/*                 fac_layer { */
-/* // ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ */
-/* label= "FAC"                              ; */
-/* // ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ */
-/* //             ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓   ┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┓ */
-/* //             ┃     Q     ┃     W     ┃     R     ┃     T     ┃     Y     ┃   ┃     f2    ┃     f3    ┃     f4    ┃    f5     ┃     P     ┃ */
-/* //             ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫ */
-/* //             ┃     F1    ┃     S     ┃     h     ┃   RET     ┃     G     ┃   ┃     H     ┃     J     ┃     K     ┃     L     ┃     ;     ┃ */
-/* // ┏━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┓ */
-/* // ┃  F2       ┃     Z     ┃     X     ┃     C     ┃   ESC     ┃     B     ┃   ┃     N     ┃     M     ┃     ,     ┃     .     ┃   esc     ┃    ext    ┃ */
-/* // ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┫   ┣━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛ */
-/* //                                     ┃           ┃           ┃           ┃   ┃           ┃    tab    ┃           ┃ */
-/* //                                     ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛   ┗━━━━━━━━━━━┻━━━━━━━━━━━┻━━━━━━━━━━━┛ */
-/*  bindings = < */
-/* // ╷           ╷           ╷           ╷           ╷           ╷           ╷   ╷           ╷           ╷           ╷           ╷           ╷           ╷ */
-/**/
-/*                 &kp Q       &kp W       &kp E       &kp R       &kp T           &kp Y       &kp U       &kp I       &kp O       &kp P */
-/*                 &kp A       &kp S       &kp D       &kp F       &kp G           &kp H       &kp J       &kp K       &kp L       &kp SEMI */
-/*     &kp N       &kp Z       &kp X       &kp C       &kp V       &kp B           &kp F1      &kp M       &kp COMMA   &kp DOT     &kp ESC    &tog FAC */
-/*                                         &kp LSHFT   &kp LCTRL   &kp RALT        &kp RET     &kp TAB     &kp BSPC */
-/*                         >; */
-/*                 }; */
+                meow_layer {
+label= "MEOW"                              ;
+ bindings = <
 
-// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                &kp B       &kp L       &kp D        &kp V         &caps_word           &trans      &kp Y        &kp O        &kp U       &kp COMMA
+                &hml LGUI N &hml LALT C &hml LCTRL M &hml LSHFT S  &kp X                &kp Z       &hmr RSHFT X &hmr RCTRL J &hmr RALT K &hmr RGUI I
+    &skq LSHFT  &kp Q       &kp G       &kp W        &kp P         &kp F13              &trans      &kp F        &kp SQT      &kp SEMI    &kp DOT     &kp FSLH
+                                        &kp TAB      &lt NAV T     &lt MOU SPACE        &key_repeat &lt SYM R    &kp BSPC
+                        >;
+                };
+
+// ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
         };
 };
